@@ -21,33 +21,9 @@ const DEFAULT_BLOCK_ORDER: BlockType[] = [
 ];
 
 const initialState: ResumeSlice = {
-  personalInfo: {
-    name: 'Иван',
-    surname: 'Иванов',
-    patronymic: 'Иванович',
-    age: 20,
-    email: 'ivanov@example.com',
-    phone: '+79991234567',
-  },
-  experience: [
-    {
-      id: '1',
-      position: 'Разработчик',
-      company: 'ООО "Рога и копыта"',
-      startDate: '01.01.2020',
-      endDate: '01.01.2022',
-      description: 'Описание опыта работы',
-    },
-  ],
-  education: [
-    {
-      id: '1',
-      institution: 'Московский государственный университет (с отличием)',
-      specialization: 'Информатика и вычислительная техника',
-      startDate: '01.09.2023',
-      endDate: '01.06.2025',
-    },
-  ],
+  personalInfo: null,
+  experience: [],
+  education: [],
   skills: [],
   certificates: [],
   about: null,

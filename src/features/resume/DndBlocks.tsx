@@ -11,13 +11,15 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import SortableItem from '../../ui/SortableItem';
 import About from './About';
 import Certificates from './Certificates';
 import Education from './Education';
 import Experience from './Experience';
 import PersonalInfo from './PersonalInfo';
+import { setBlockOrder } from './resumeSlice';
 import Skills from './Skills';
 import type { BlockType } from './types';
 
@@ -26,14 +28,8 @@ interface Props {
 }
 
 export default function DndBlocks({ setOpenedBlock }: Props) {
-  const [blocks, setBlocks] = useState<BlockType[]>([
-    'personalInfo',
-    'experience',
-    'education',
-    'skills',
-    'certificates',
-    'about',
-  ]);
+  const dispatch = useDispatch();
+  const blocks = useSelector((state: RootState) => state.resume.blockOrder);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -42,12 +38,10 @@ export default function DndBlocks({ setOpenedBlock }: Props) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (active.id !== over?.id) {
-      setBlocks((items) => {
-        const oldIndex = items.indexOf(active.id as BlockType);
-        const newIndex = items.indexOf(over?.id as BlockType);
-
-        return arrayMove(items, oldIndex, newIndex);
-      });
+      const oldIndex = blocks.indexOf(active.id as BlockType);
+      const newIndex = blocks.indexOf(over?.id as BlockType);
+      const newOrder = arrayMove(blocks, oldIndex, newIndex);
+      dispatch(setBlockOrder(newOrder));
     }
   };
 

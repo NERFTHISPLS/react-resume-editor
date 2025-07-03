@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { deleteFromArray, updateSliceArray } from '../../utils/helpers';
 import type {
   About,
+  BlockType,
   Certificate,
   Education,
   Experience,
@@ -9,6 +10,15 @@ import type {
   ResumeSlice,
   Skill,
 } from './types';
+
+const DEFAULT_BLOCK_ORDER: BlockType[] = [
+  'personalInfo',
+  'experience',
+  'education',
+  'skills',
+  'certificates',
+  'about',
+];
 
 const initialState: ResumeSlice = {
   personalInfo: {
@@ -45,6 +55,7 @@ const initialState: ResumeSlice = {
   selectedEducationId: null,
   selectedSkillId: null,
   selectedCertificateId: null,
+  blockOrder: DEFAULT_BLOCK_ORDER,
 };
 
 export const resumeSlice = createSlice({
@@ -126,6 +137,10 @@ export const resumeSlice = createSlice({
     setAbout: (state, action: PayloadAction<About | null>) => {
       state.about = action.payload;
     },
+
+    setBlockOrder: (state, action: PayloadAction<BlockType[]>) => {
+      state.blockOrder = action.payload;
+    },
   },
 });
 
@@ -144,6 +159,7 @@ export const {
   deleteCertificate,
   setSelectedCertificateId,
   setAbout,
+  setBlockOrder,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

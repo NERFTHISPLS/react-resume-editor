@@ -1,14 +1,14 @@
 import type { ReactNode } from 'react';
 
 interface Props {
-  title: string;
+  title?: string;
   children: ReactNode;
 }
 
 export default function BlockInfo({ title, children }: Props) {
   return (
-    <div className="border-b border-gray-200 p-4 rounded bg-gray-50 cursor-pointer group relative">
-      <h2 className="text-2xl font-bold mb-2">{title}</h2>
+    <div className="border-b border-gray-300 p-4 rounded bg-gray-50 cursor-pointer group relative">
+      {title && <h2 className="text-2xl font-bold mb-2">{title}</h2>}
 
       <div className="flex flex-col gap-1">{children}</div>
 

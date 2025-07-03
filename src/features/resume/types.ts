@@ -29,6 +29,7 @@ export interface Skill {
 }
 
 export interface Certificate {
+  id: string;
   name: string;
   date: string;
   description: string;
@@ -38,7 +39,7 @@ export interface About {
   description: string;
 }
 
-export interface Resume {
+export interface ResumeSlice {
   personalInfo: PersonalInfo | null;
   experience: Experience[];
   education: Education[];
@@ -48,6 +49,7 @@ export interface Resume {
   selectedExperienceId: string | null;
   selectedEducationId: string | null;
   selectedSkillId: string | null;
+  selectedCertificateId: string | null;
 }
 
 export type BlockType =

@@ -1,7 +1,16 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Education, Experience, PersonalInfo, Resume } from './types';
+import { updateSliceArray } from '../../utils/helpers';
+import type {
+  About,
+  Certificate,
+  Education,
+  Experience,
+  PersonalInfo,
+  ResumeSlice,
+  Skill,
+} from './types';
 
-const initialState: Resume = {
+const initialState: ResumeSlice = {
   personalInfo: {
     name: 'Иван',
     surname: 'Иванов',
@@ -14,8 +23,8 @@ const initialState: Resume = {
       id: '1',
       position: 'Разработчик',
       company: 'ООО "Рога и копыта"',
-      startDate: '2020-01-01',
-      endDate: '2022-01-01',
+      startDate: '01.01.2020',
+      endDate: '01.01.2022',
       description: 'Описание опыта работы',
     },
   ],
@@ -24,8 +33,8 @@ const initialState: Resume = {
       id: '1',
       institution: 'Московский государственный университет (с отличием)',
       specialization: 'Информатика и вычислительная техника',
-      startDate: '2023-09-01',
-      endDate: '2025-06-01',
+      startDate: '01.09.2023',
+      endDate: '01.06.2025',
     },
   ],
   skills: [],
@@ -34,6 +43,7 @@ const initialState: Resume = {
   selectedExperienceId: null,
   selectedEducationId: null,
   selectedSkillId: null,
+  selectedCertificateId: null,
 };
 
 export const resumeSlice = createSlice({
@@ -45,14 +55,12 @@ export const resumeSlice = createSlice({
     },
 
     setExperience: (state, action: PayloadAction<Experience>) => {
-      if (state.selectedExperienceId) {
-        state.experience = state.experience.map((exp) =>
-          exp.id === state.selectedExperienceId ? action.payload : exp,
-        );
-        state.selectedExperienceId = null;
-      } else {
-        state.experience.push(action.payload);
-      }
+      state.experience = updateSliceArray(
+        state.selectedExperienceId,
+        state.experience,
+        action,
+      );
+      state.selectedExperienceId = null;
     },
 
     setSelectedExperienceId: (state, action: PayloadAction<string | null>) => {
@@ -60,40 +68,45 @@ export const resumeSlice = createSlice({
     },
 
     setEducation: (state, action: PayloadAction<Education>) => {
-      if (state.selectedEducationId) {
-        state.education = state.education.map((edu) =>
-          edu.institution === state.selectedEducationId ? action.payload : edu,
-        );
-        state.selectedEducationId = null;
-      } else {
-        state.education.push(action.payload);
-      }
+      state.education = updateSliceArray(
+        state.selectedEducationId,
+        state.education,
+        action,
+      );
+      state.selectedEducationId = null;
     },
 
     setSelectedEducationId: (state, action: PayloadAction<string | null>) => {
       state.selectedEducationId = action.payload;
     },
 
-    setSkills: (state, action) => {
-      if (state.selectedSkillId) {
-        state.skills = state.skills.map((skill) =>
-          skill.id === state.selectedSkillId ? action.payload : skill,
-        );
-        state.selectedSkillId = null;
-      } else {
-        state.skills.push(action.payload);
-      }
+    setSkills: (state, action: PayloadAction<Skill>) => {
+      state.skills = updateSliceArray(
+        state.selectedSkillId,
+        state.skills,
+        action,
+      );
+      state.selectedSkillId = null;
     },
 
     setSelectedSkillId: (state, action: PayloadAction<string | null>) => {
       state.selectedSkillId = action.payload;
     },
 
-    setCertificates: (state, action) => {
-      state.certificates = action.payload;
+    setCertificates: (state, action: PayloadAction<Certificate>) => {
+      state.certificates = updateSliceArray(
+        state.selectedCertificateId,
+        state.certificates,
+        action,
+      );
+      state.selectedCertificateId = null;
     },
 
-    setAbout: (state, action) => {
+    setSelectedCertificateId: (state, action: PayloadAction<string | null>) => {
+      state.selectedCertificateId = action.payload;
+    },
+
+    setAbout: (state, action: PayloadAction<About>) => {
       state.about = action.payload;
     },
   },
@@ -108,6 +121,7 @@ export const {
   setSkills,
   setSelectedSkillId,
   setCertificates,
+  setSelectedCertificateId,
   setAbout,
 } = resumeSlice.actions;
 

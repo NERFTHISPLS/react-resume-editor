@@ -1,9 +1,11 @@
+import { format } from 'date-fns';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import type { RootState } from '../../store';
 import BlockForm from '../../ui/BlockForm';
 import FormRow from '../../ui/FormRow';
+import { DATE_FORMAT } from '../../utils/constants';
 import { setExperience, setSelectedExperienceId } from './resumeSlice';
 import type { Experience } from './types';
 
@@ -42,7 +44,13 @@ export default function ExperienceForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(setExperience(form));
+    dispatch(
+      setExperience({
+        ...form,
+        startDate: format(form.startDate, DATE_FORMAT),
+        endDate: format(form.endDate, DATE_FORMAT),
+      }),
+    );
     dispatch(setSelectedExperienceId(null));
     onCancel();
   };
@@ -71,7 +79,7 @@ export default function ExperienceForm({ onCancel }: Props) {
 
       <FormRow
         isRequired={true}
-        inputType="text"
+        inputType="date"
         htmlFor="startDate"
         value={form.startDate}
         onChange={handleChange}
@@ -81,7 +89,7 @@ export default function ExperienceForm({ onCancel }: Props) {
 
       <FormRow
         isRequired={true}
-        inputType="text"
+        inputType="date"
         htmlFor="endDate"
         value={form.endDate}
         onChange={handleChange}

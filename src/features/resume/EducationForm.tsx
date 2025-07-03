@@ -1,9 +1,11 @@
+import { format } from 'date-fns';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import type { RootState } from '../../store';
 import BlockForm from '../../ui/BlockForm';
 import FormRow from '../../ui/FormRow';
+import { DATE_FORMAT } from '../../utils/constants';
 import { setEducation, setSelectedEducationId } from './resumeSlice';
 import type { Education } from './types';
 
@@ -41,7 +43,13 @@ export default function EducationForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(setEducation(form));
+    dispatch(
+      setEducation({
+        ...form,
+        startDate: format(form.startDate, DATE_FORMAT),
+        endDate: format(form.endDate, DATE_FORMAT),
+      }),
+    );
     dispatch(setSelectedEducationId(null));
     onCancel();
   };
@@ -70,7 +78,7 @@ export default function EducationForm({ onCancel }: Props) {
 
       <FormRow
         isRequired={true}
-        inputType="text"
+        inputType="date"
         htmlFor="startDate"
         value={form.startDate}
         onChange={handleChange}
@@ -80,7 +88,7 @@ export default function EducationForm({ onCancel }: Props) {
 
       <FormRow
         isRequired={true}
-        inputType="text"
+        inputType="date"
         htmlFor="endDate"
         value={form.endDate}
         onChange={handleChange}

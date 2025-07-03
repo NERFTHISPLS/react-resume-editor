@@ -10,7 +10,7 @@ interface Props {
   onClick: () => void;
 }
 
-export default function PersonalInfoBlock({ onClick }: Props) {
+export default function PersonalInfo({ onClick }: Props) {
   const personalInfo = useSelector(
     (state: RootState) => state.resume.personalInfo,
   );

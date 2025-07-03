@@ -42,13 +42,7 @@ export default function EducationForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      setEducation({
-        ...form,
-        startDate: format(form.startDate, DATE_FORMAT),
-        endDate: format(form.endDate, DATE_FORMAT),
-      }),
-    );
+    dispatch(setEducation(form));
     dispatch(setSelectedEducationId(null));
     onCancel();
   };
@@ -79,7 +73,7 @@ export default function EducationForm({ onCancel }: Props) {
         isRequired={true}
         inputType="date"
         htmlFor="startDate"
-        value={form.startDate}
+        value={form.startDate ? format(form.startDate, DATE_FORMAT) : ''}
         onChange={handleChange}
       >
         Дата начала
@@ -89,7 +83,7 @@ export default function EducationForm({ onCancel }: Props) {
         isRequired={true}
         inputType="date"
         htmlFor="endDate"
-        value={form.endDate}
+        value={form.endDate ? format(form.endDate, DATE_FORMAT) : ''}
         onChange={handleChange}
       >
         Дата окончания

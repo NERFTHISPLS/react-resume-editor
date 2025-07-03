@@ -43,13 +43,7 @@ export default function ExperienceForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      setExperience({
-        ...form,
-        startDate: format(form.startDate, DATE_FORMAT),
-        endDate: format(form.endDate, DATE_FORMAT),
-      }),
-    );
+    dispatch(setExperience(form));
     dispatch(setSelectedExperienceId(null));
     onCancel();
   };
@@ -80,7 +74,7 @@ export default function ExperienceForm({ onCancel }: Props) {
         isRequired={true}
         inputType="date"
         htmlFor="startDate"
-        value={form.startDate}
+        value={form.startDate ? format(form.startDate, DATE_FORMAT) : ''}
         onChange={handleChange}
       >
         Дата начала
@@ -90,7 +84,7 @@ export default function ExperienceForm({ onCancel }: Props) {
         isRequired={true}
         inputType="date"
         htmlFor="endDate"
-        value={form.endDate}
+        value={form.endDate ? format(form.endDate, DATE_FORMAT) : ''}
         onChange={handleChange}
       >
         Дата окончания

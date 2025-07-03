@@ -1,7 +1,9 @@
+import { format } from 'date-fns';
 import type { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
+import { DATE_FORMAT_UI } from '../../utils/constants';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
 import { deleteExperience, setSelectedExperienceId } from './resumeSlice';
@@ -35,7 +37,7 @@ export default function Experience({ onClick }: Props) {
             <BlockInfoRow title="Компания" info={item.company} />
             <BlockInfoRow
               title="Даты"
-              info={`${item.startDate} - ${item.endDate}`}
+              info={`${format(item.startDate, DATE_FORMAT_UI)} - ${format(item.endDate, DATE_FORMAT_UI)}`}
             />
             <BlockInfoRow title="Описание" info={item.description} />
           </BlockInfo>

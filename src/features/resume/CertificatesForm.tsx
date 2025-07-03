@@ -41,9 +41,7 @@ export default function CertificatesForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(
-      setCertificates({ ...form, date: format(form.date, DATE_FORMAT) }),
-    );
+    dispatch(setCertificates(form));
     dispatch(setSelectedCertificateId(null));
     onCancel();
   };
@@ -64,7 +62,7 @@ export default function CertificatesForm({ onCancel }: Props) {
         isRequired={true}
         inputType="date"
         htmlFor="date"
-        value={form.date}
+        value={form.date ? format(form.date, DATE_FORMAT) : ''}
         onChange={handleChange}
       >
         Дата

@@ -26,6 +26,7 @@ export default function PersonalInfoBlock({ onClick }: Props) {
             <BlockInfoRow title="Отчество" info={personalInfo.patronymic} />
           )}
 
+          <BlockInfoRow title="Возраст" info={personalInfo.age.toString()} />
           <BlockInfoRow title="Email" info={personalInfo.email} />
           <BlockInfoRow title="Телефон" info={personalInfo.phone} />
         </BlockInfo>

@@ -11,13 +11,14 @@ interface Props {
 }
 
 export default function PersonalInfoForm({ onCancel }: Props) {
-  const { name, surname, patronymic, email, phone } =
+  const { name, surname, patronymic, age, email, phone } =
     useSelector((state: RootState) => state.resume.personalInfo) ?? {};
 
   const [form, setForm] = useState<PersonalInfo>({
     name: name ?? '',
     surname: surname ?? '',
     patronymic: patronymic ?? '',
+    age: age ?? 0,
     email: email ?? '',
     phone: phone ?? '',
   });
@@ -33,7 +34,7 @@ export default function PersonalInfoForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(setPersonalInfo(form));
+    dispatch(setPersonalInfo({ ...form, age: Number(form.age) }));
     onCancel();
   };
 
@@ -70,6 +71,16 @@ export default function PersonalInfoForm({ onCancel }: Props) {
         onChange={handleChange}
       >
         Отчество (при наличии)
+      </FormRow>
+
+      <FormRow
+        isRequired={true}
+        inputType="number"
+        htmlFor="age"
+        value={form.age.toString()}
+        onChange={handleChange}
+      >
+        Возраст
       </FormRow>
 
       <FormRow

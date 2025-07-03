@@ -15,6 +15,7 @@ const initialState: ResumeSlice = {
     name: 'Иван',
     surname: 'Иванов',
     patronymic: 'Иванович',
+    age: 20,
     email: 'ivanov@example.com',
     phone: '+79991234567',
   },

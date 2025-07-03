@@ -27,7 +27,7 @@ export default function Skills({ onClick }: Props) {
       <ul className="grid grid-cols-3 gap-2">
         {skills.length > 0 &&
           skills.map((item) => (
-            <li key={item.id}>
+            <li className="text-center" key={item.id}>
               <BlockInfo
                 onClick={() => dispatch(setSelectedSkillId(item.id))}
                 onDelete={(e) => handleDelete(e, item.id)}

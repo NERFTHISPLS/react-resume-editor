@@ -1,12 +1,15 @@
 import { format } from 'date-fns';
 import type { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../store';
-import AddBlockButton from '../../ui/AddBlockButton';
-import { DATE_FORMAT_UI } from '../../utils/constants';
+import type { RootState } from '../../../store';
+import AddBlockButton from '../../../ui/AddBlockButton';
+import { DATE_FORMAT_UI } from '../../../utils/constants';
+import {
+  deleteExperience,
+  setSelectedExperienceId,
+} from '../logic/resumeSlice';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import { deleteExperience, setSelectedExperienceId } from './resumeSlice';
 
 interface Props {
   onClick: () => void;

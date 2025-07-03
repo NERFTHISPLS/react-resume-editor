@@ -1,5 +1,5 @@
-import Editor from '../features/resume/Editor';
-import Preview from '../features/resume/Preview';
+import Preview from '../features/resume/components/Preview';
+import Editor from '../features/resume/dnd/Editor';
 
 export default function AppLayout() {
   return (

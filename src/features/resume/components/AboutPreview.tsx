@@ -1,6 +1,6 @@
+import type { About } from '../logic/types';
 import BlockInfoRow from './BlockInfoRow';
 import PreviewBlock from './PreviewBlock';
-import type { About } from './types';
 
 interface Props {
   about: About;

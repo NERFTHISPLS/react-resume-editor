@@ -1,11 +1,11 @@
-import Modal from '../../ui/Modal';
-import AboutForm from './AboutForm';
-import CertificatesForm from './CertificatesForm';
-import EducationForm from './EducationForm';
-import ExperienceForm from './ExperienceForm';
-import PersonalInfoForm from './PersonalInfoForm';
-import SkillsForm from './SkillsForm';
-import type { BlockType } from './types';
+import Modal from '../../../ui/Modal';
+import AboutForm from '../forms/AboutForm';
+import CertificatesForm from '../forms/CertificatesForm';
+import EducationForm from '../forms/EducationForm';
+import ExperienceForm from '../forms/ExperienceForm';
+import PersonalInfoForm from '../forms/PersonalInfoForm';
+import SkillsForm from '../forms/SkillsForm';
+import type { BlockType } from '../logic/types';
 
 interface Props {
   openedBlock: BlockType | null;

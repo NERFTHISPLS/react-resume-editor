@@ -12,16 +12,16 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../store';
-import SortableItem from '../../ui/SortableItem';
-import About from './About';
-import Certificates from './Certificates';
-import Education from './Education';
-import Experience from './Experience';
-import PersonalInfo from './PersonalInfo';
-import { setBlockOrder } from './resumeSlice';
-import Skills from './Skills';
-import type { BlockType } from './types';
+import type { RootState } from '../../../store';
+import SortableItem from '../../../ui/SortableItem';
+import About from '../components/About';
+import Certificates from '../components/Certificates';
+import Education from '../components/Education';
+import Experience from '../components/Experience';
+import PersonalInfo from '../components/PersonalInfo';
+import Skills from '../components/Skills';
+import { setBlockOrder } from '../logic/resumeSlice';
+import type { BlockType } from '../logic/types';
 
 interface Props {
   setOpenedBlock: (block: BlockType) => void;

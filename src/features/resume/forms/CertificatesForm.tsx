@@ -2,13 +2,16 @@ import { format } from 'date-fns';
 import { useState, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import type { RootState } from '../../store';
-import type { FormChangeEvent } from '../../types';
-import BlockForm from '../../ui/BlockForm';
-import FormRow from '../../ui/FormRow';
-import { DATE_FORMAT } from '../../utils/constants';
-import { setCertificates, setSelectedCertificateId } from './resumeSlice';
-import type { Certificate } from './types';
+import type { RootState } from '../../../store';
+import type { FormChangeEvent } from '../../../types';
+import BlockForm from '../../../ui/BlockForm';
+import FormRow from '../../../ui/FormRow';
+import { DATE_FORMAT } from '../../../utils/constants';
+import {
+  setCertificates,
+  setSelectedCertificateId,
+} from '../logic/resumeSlice';
+import type { Certificate } from '../logic/types';
 
 interface Props {
   onCancel: () => void;

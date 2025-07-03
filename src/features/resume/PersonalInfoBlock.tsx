@@ -1,16 +1,13 @@
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import type { PersonalInfo } from './types';
 
 export default function PersonalInfoBlock() {
-  const personalInfo: PersonalInfo | null = {
-    name: 'Иван',
-    surname: 'Иванов',
-    patronymic: 'Иванович',
-    email: 'ivanov@example.com',
-    phone: '+79991234567',
-  };
+  const personalInfo = useSelector(
+    (state: RootState) => state.resume.personalInfo,
+  );
 
   return (
     <section className="flex flex-col">

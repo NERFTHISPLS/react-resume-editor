@@ -1,19 +1,11 @@
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import type { Skill } from './types';
 
 export default function Skills() {
-  const skills: Skill[] = [
-    {
-      name: 'HTML',
-      level: 'advanced',
-    },
-    {
-      name: 'CSS',
-      level: 'intermediate',
-    },
-  ];
+  const skills = useSelector((state: RootState) => state.resume.skills);
 
   return (
     <section className="flex flex-col">

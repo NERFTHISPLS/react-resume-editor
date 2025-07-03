@@ -1,16 +1,13 @@
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import type { Certificate } from './types';
 
 export default function Certificates() {
-  const certificates: Certificate[] = [
-    {
-      name: 'HTML',
-      date: '01.01.2020',
-      description: 'HTML',
-    },
-  ];
+  const certificates = useSelector(
+    (state: RootState) => state.resume.certificates,
+  );
 
   return (
     <section className="flex flex-col">

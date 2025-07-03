@@ -36,3 +36,12 @@ export interface Certificate {
 export interface About {
   description: string;
 }
+
+export interface Resume {
+  personalInfo: PersonalInfo | null;
+  experience: Experience[];
+  education: Education[];
+  skills: Skill[];
+  certificates: Certificate[];
+  about: About | null;
+}

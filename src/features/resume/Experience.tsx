@@ -1,27 +1,11 @@
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import type { Experience } from './types';
 
 export default function Experience() {
-  const experience: Experience[] = [
-    {
-      position: 'Frontend Developer',
-      company: 'Google',
-      startDate: '01.01.2020',
-      endDate: '01.01.2021',
-      description:
-        'Developed and maintained web applications using React and Node.js',
-    },
-    {
-      position: 'Backend Developer',
-      company: 'Yandex',
-      startDate: '01.01.2021',
-      endDate: '01.01.2022',
-      description:
-        'Developed and maintained backend services using Node.js and PostgreSQL',
-    },
-  ];
+  const experience = useSelector((state: RootState) => state.resume.experience);
 
   return (
     <section className="flex flex-col">

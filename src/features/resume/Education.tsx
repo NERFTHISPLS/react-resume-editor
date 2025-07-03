@@ -1,18 +1,11 @@
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import type { Education } from './types';
 
 export default function Education() {
-  const education: Education[] = [
-    {
-      institution: 'Московский государственный университет',
-      specialization: 'Информатика и вычислительная техника',
-      startDate: '01.01.2020',
-      endDate: '01.01.2024',
-      description: 'Специальность: Информатика и вычислительная техника',
-    },
-  ];
+  const education = useSelector((state: RootState) => state.resume.education);
 
   return (
     <section className="flex flex-col">

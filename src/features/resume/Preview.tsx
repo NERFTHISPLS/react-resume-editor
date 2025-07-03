@@ -62,7 +62,12 @@ export default function Preview() {
       <h1 className="text-3xl font-extrabold text-center text-blue-900 mb-6">
         Резюме
       </h1>
-      {blockOrder.map((block) => blockToComponent[block](data))}
+      {blockOrder.map(
+        (block) =>
+          blockToComponent[block](data) && (
+            <div key={block}>{blockToComponent[block](data)}</div>
+          ),
+      )}
     </div>
   );
 }

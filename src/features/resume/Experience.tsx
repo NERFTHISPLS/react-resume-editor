@@ -33,7 +33,10 @@ export default function Experience({ onClick }: Props) {
           </BlockInfo>
         ))}
 
-      <AddBlockButton onClick={() => dispatch(setSelectedExperienceId(null))}>
+      <AddBlockButton
+        className="mt-4"
+        onClick={() => dispatch(setSelectedExperienceId(null))}
+      >
         + Добавить опыт работы
       </AddBlockButton>
     </section>

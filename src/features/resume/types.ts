@@ -16,16 +16,16 @@ export interface Experience {
 }
 
 export interface Education {
+  id: string;
   institution: string;
   specialization: string;
   startDate: string;
   endDate: string;
-  description: string;
 }
 
 export interface Skill {
+  id: string;
   name: string;
-  level: 'beginner' | 'intermediate' | 'advanced';
 }
 
 export interface Certificate {
@@ -46,6 +46,8 @@ export interface Resume {
   certificates: Certificate[];
   about: About | null;
   selectedExperienceId: string | null;
+  selectedEducationId: string | null;
+  selectedSkillId: string | null;
 }
 
 export type BlockType =

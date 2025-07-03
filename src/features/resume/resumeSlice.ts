@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Experience, PersonalInfo, Resume } from './types';
+import type { Education, Experience, PersonalInfo, Resume } from './types';
 
 const initialState: Resume = {
   personalInfo: {
@@ -19,11 +19,21 @@ const initialState: Resume = {
       description: 'Описание опыта работы',
     },
   ],
-  education: [],
+  education: [
+    {
+      id: '1',
+      institution: 'Московский государственный университет (с отличием)',
+      specialization: 'Информатика и вычислительная техника',
+      startDate: '2023-09-01',
+      endDate: '2025-06-01',
+    },
+  ],
   skills: [],
   certificates: [],
   about: null,
   selectedExperienceId: null,
+  selectedEducationId: null,
+  selectedSkillId: null,
 };
 
 export const resumeSlice = createSlice({
@@ -49,12 +59,34 @@ export const resumeSlice = createSlice({
       state.selectedExperienceId = action.payload;
     },
 
-    setEducation: (state, action) => {
-      state.education = action.payload;
+    setEducation: (state, action: PayloadAction<Education>) => {
+      if (state.selectedEducationId) {
+        state.education = state.education.map((edu) =>
+          edu.institution === state.selectedEducationId ? action.payload : edu,
+        );
+        state.selectedEducationId = null;
+      } else {
+        state.education.push(action.payload);
+      }
+    },
+
+    setSelectedEducationId: (state, action: PayloadAction<string | null>) => {
+      state.selectedEducationId = action.payload;
     },
 
     setSkills: (state, action) => {
-      state.skills = action.payload;
+      if (state.selectedSkillId) {
+        state.skills = state.skills.map((skill) =>
+          skill.id === state.selectedSkillId ? action.payload : skill,
+        );
+        state.selectedSkillId = null;
+      } else {
+        state.skills.push(action.payload);
+      }
+    },
+
+    setSelectedSkillId: (state, action: PayloadAction<string | null>) => {
+      state.selectedSkillId = action.payload;
     },
 
     setCertificates: (state, action) => {
@@ -72,7 +104,9 @@ export const {
   setExperience,
   setSelectedExperienceId,
   setEducation,
+  setSelectedEducationId,
   setSkills,
+  setSelectedSkillId,
   setCertificates,
   setAbout,
 } = resumeSlice.actions;

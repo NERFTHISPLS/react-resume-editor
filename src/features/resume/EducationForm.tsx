@@ -4,30 +4,29 @@ import { v4 as uuidv4 } from 'uuid';
 import type { RootState } from '../../store';
 import BlockForm from '../../ui/BlockForm';
 import FormRow from '../../ui/FormRow';
-import { setExperience, setSelectedExperienceId } from './resumeSlice';
-import type { Experience } from './types';
+import { setEducation, setSelectedEducationId } from './resumeSlice';
+import type { Education } from './types';
 
 interface Props {
   onCancel: () => void;
 }
 
-export default function ExperienceForm({ onCancel }: Props) {
-  const selectedExperienceId = useSelector(
-    (state: RootState) => state.resume.selectedExperienceId,
+export default function EducationForm({ onCancel }: Props) {
+  const selectedEducationId = useSelector(
+    (state: RootState) => state.resume.selectedEducationId,
   );
 
-  const targetExperience = useSelector((state: RootState) =>
-    state.resume.experience.find((exp) => exp.id === selectedExperienceId),
+  const targetEducation = useSelector((state: RootState) =>
+    state.resume.education.find((edu) => edu.id === selectedEducationId),
   );
 
-  const [form, setForm] = useState<Experience>(
-    targetExperience ?? {
+  const [form, setForm] = useState<Education>(
+    targetEducation ?? {
       id: uuidv4(),
-      position: '',
-      company: '',
+      institution: '',
+      specialization: '',
       startDate: '',
       endDate: '',
-      description: '',
     },
   );
 
@@ -42,31 +41,31 @@ export default function ExperienceForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(setExperience(form));
-    dispatch(setSelectedExperienceId(null));
+    dispatch(setEducation(form));
+    dispatch(setSelectedEducationId(null));
     onCancel();
   };
 
   return (
-    <BlockForm title="Опыт работы" onCancel={onCancel} onSubmit={handleSubmit}>
+    <BlockForm title="Образование" onCancel={onCancel} onSubmit={handleSubmit}>
       <FormRow
         isRequired={true}
         inputType="text"
-        htmlFor="position"
-        value={form.position}
+        htmlFor="institution"
+        value={form.institution}
         onChange={handleChange}
       >
-        Должность
+        Учебное заведение
       </FormRow>
 
       <FormRow
         isRequired={true}
         inputType="text"
-        htmlFor="company"
-        value={form.company}
+        htmlFor="specialization"
+        value={form.specialization}
         onChange={handleChange}
       >
-        Компания
+        Специальность
       </FormRow>
 
       <FormRow
@@ -87,16 +86,6 @@ export default function ExperienceForm({ onCancel }: Props) {
         onChange={handleChange}
       >
         Дата окончания
-      </FormRow>
-
-      <FormRow
-        isRequired={true}
-        inputType="textarea"
-        htmlFor="description"
-        value={form.description}
-        onChange={handleChange}
-      >
-        Описание
       </FormRow>
     </BlockForm>
   );

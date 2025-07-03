@@ -1,22 +1,19 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../store';
 import Modal from '../../ui/Modal';
 import About from './About';
 import Certificates from './Certificates';
 import Education from './Education';
+import EducationForm from './EducationForm';
 import Experience from './Experience';
 import ExperienceForm from './ExperienceForm';
 import PersonalInfoBlock from './PersonalInfoBlock';
 import PersonalInfoForm from './PersonalInfoForm';
 import Skills from './Skills';
+import SkillsForm from './SkillsForm';
 import type { BlockType } from './types';
 
 export default function Editor() {
   const [openedBlock, setOpenedBlock] = useState<BlockType | null>(null);
-  const selectedExperienceId = useSelector(
-    (state: RootState) => state.resume.selectedExperienceId,
-  );
 
   const handleCloseForm = () => {
     setOpenedBlock(null);
@@ -37,11 +34,14 @@ export default function Editor() {
         )}
 
         {openedBlock === 'experience' && (
-          <ExperienceForm
-            selectedExperienceId={selectedExperienceId}
-            onCancel={handleCloseForm}
-          />
+          <ExperienceForm onCancel={handleCloseForm} />
         )}
+
+        {openedBlock === 'education' && (
+          <EducationForm onCancel={handleCloseForm} />
+        )}
+
+        {openedBlock === 'skills' && <SkillsForm onCancel={handleCloseForm} />}
       </Modal>
     </div>
   );

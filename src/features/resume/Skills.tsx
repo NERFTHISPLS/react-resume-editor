@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
+import { setSelectedSkillId } from './resumeSlice';
 
 interface Props {
   onClick: () => void;
@@ -10,19 +11,29 @@ interface Props {
 
 export default function Skills({ onClick }: Props) {
   const skills = useSelector((state: RootState) => state.resume.skills);
+  const dispatch = useDispatch();
 
   return (
     <section className="flex flex-col" onClick={onClick}>
       <h2 className="text-2xl font-bold mb-2">Навыки</h2>
 
-      {skills.length > 0 &&
-        skills.map((item) => (
-          <BlockInfo key={item.name} title={item.name}>
-            <BlockInfoRow title="Уровень" info={item.level} />
-          </BlockInfo>
-        ))}
+      <ul className="grid grid-cols-3 gap-2">
+        {skills.length > 0 &&
+          skills.map((item) => (
+            <li key={item.id}>
+              <BlockInfo onClick={() => dispatch(setSelectedSkillId(item.id))}>
+                <BlockInfoRow info={item.name} />
+              </BlockInfo>
+            </li>
+          ))}
+      </ul>
 
-      <AddBlockButton>+ Добавить навык</AddBlockButton>
+      <AddBlockButton
+        className="mt-4"
+        onClick={() => dispatch(setSelectedSkillId(null))}
+      >
+        + Добавить навык
+      </AddBlockButton>
     </section>
   );
 }

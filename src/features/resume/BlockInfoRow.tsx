@@ -1,12 +1,12 @@
 interface Props {
-  title: string;
+  title?: string;
   info: string;
 }
 
 export default function BlockInfoRow({ title, info }: Props) {
   return (
     <div>
-      <b>{title}:</b> {info}
+      {title && <b>{title}:</b>} {info}
     </div>
   );
 }

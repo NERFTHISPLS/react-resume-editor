@@ -51,6 +51,7 @@ export interface ResumeSlice {
   selectedEducationId: string | null;
   selectedSkillId: string | null;
   selectedCertificateId: string | null;
+  blockOrder: BlockType[];
 }
 
 export type BlockType =

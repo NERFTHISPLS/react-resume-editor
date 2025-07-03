@@ -1,13 +1,13 @@
 import { type ReactElement } from 'react';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../../store';
+import type { RootState } from '../../../store';
+import type { BlockType, ResumeSlice } from '../logic/types';
 import AboutPreview from './AboutPreview';
 import CertificatesPreview from './CertificatesPreview';
 import EducationPreview from './EducationPreview';
 import ExperiencePreview from './ExperiencePreview';
 import PersonalInfoPreview from './PersonalInfoPreview';
 import SkillsPreview from './SkillsPreview';
-import type { BlockType, ResumeSlice } from './types';
 
 type PreviewData = Pick<
   ResumeSlice,
@@ -63,7 +63,7 @@ export default function Preview() {
         Резюме
       </h1>
       {blockOrder.map(
-        (block) =>
+        (block: BlockType) =>
           blockToComponent[block](data) && (
             <div key={block}>{blockToComponent[block](data)}</div>
           ),

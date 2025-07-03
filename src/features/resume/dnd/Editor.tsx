@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import ModalForms from '../components/ModalForms';
+import type { BlockType } from '../logic/types';
 import DndBlocks from './DndBlocks';
-import ModalForms from './ModalForms';
-import type { BlockType } from './types';
 
 export default function Editor() {
   const [openedBlock, setOpenedBlock] = useState<BlockType | null>(null);

@@ -1,6 +1,6 @@
+import type { Skill } from '../logic/types';
 import BlockInfoRow from './BlockInfoRow';
 import PreviewBlock from './PreviewBlock';
-import type { Skill } from './types';
 
 interface Props {
   skills: Skill[];

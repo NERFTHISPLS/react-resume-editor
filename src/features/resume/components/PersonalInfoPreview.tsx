@@ -1,6 +1,6 @@
+import type { PersonalInfo } from '../logic/types';
 import BlockInfoRow from './BlockInfoRow';
 import PreviewBlock from './PreviewBlock';
-import type { PersonalInfo } from './types';
 
 interface Props {
   personalInfo: PersonalInfo;

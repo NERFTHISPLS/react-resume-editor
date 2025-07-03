@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
-import { DATE_FORMAT_UI } from '../../utils/constants';
+import { DATE_FORMAT_UI } from '../../../utils/constants';
+import type { Education } from '../logic/types';
 import BlockInfoRow from './BlockInfoRow';
 import PreviewBlock from './PreviewBlock';
-import type { Education } from './types';
 
 interface Props {
   education: Education[];

@@ -1,11 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../store';
-import type { FormChangeEvent } from '../../types';
-import BlockForm from '../../ui/BlockForm';
-import FormRow from '../../ui/FormRow';
-import { setAbout } from './resumeSlice';
-import type { About } from './types';
+import type { RootState } from '../../../store';
+import type { FormChangeEvent } from '../../../types';
+import BlockForm from '../../../ui/BlockForm';
+import FormRow from '../../../ui/FormRow';
+import { setAbout } from '../logic/resumeSlice';
+import type { About } from '../logic/types';
 
 interface Props {
   onCancel: () => void;

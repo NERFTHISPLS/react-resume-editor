@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
-import { DATE_FORMAT_UI } from '../../utils/constants';
+import { DATE_FORMAT_UI } from '../../../utils/constants';
+import type { Certificate } from '../logic/types';
 import BlockInfoRow from './BlockInfoRow';
 import PreviewBlock from './PreviewBlock';
-import type { Certificate } from './types';
 
 interface Props {
   certificates: Certificate[];

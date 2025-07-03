@@ -1,10 +1,10 @@
 import type { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../store';
-import AddBlockButton from '../../ui/AddBlockButton';
+import type { RootState } from '../../../store';
+import AddBlockButton from '../../../ui/AddBlockButton';
+import { setAbout } from '../logic/resumeSlice';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import { setAbout } from './resumeSlice';
 
 interface Props {
   onClick: () => void;

@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { deleteFromArray, updateSliceArray } from '../../utils/helpers';
+import { deleteFromArray, updateSliceArray } from '../../../utils/helpers';
 import type {
   About,
   BlockType,

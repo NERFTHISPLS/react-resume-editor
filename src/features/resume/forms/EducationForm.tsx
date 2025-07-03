@@ -2,13 +2,13 @@ import { format } from 'date-fns';
 import { useState, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import type { RootState } from '../../store';
-import type { FormChangeEvent } from '../../types';
-import BlockForm from '../../ui/BlockForm';
-import FormRow from '../../ui/FormRow';
-import { DATE_FORMAT } from '../../utils/constants';
-import { setEducation, setSelectedEducationId } from './resumeSlice';
-import type { Education } from './types';
+import type { RootState } from '../../../store';
+import type { FormChangeEvent } from '../../../types';
+import BlockForm from '../../../ui/BlockForm';
+import FormRow from '../../../ui/FormRow';
+import { DATE_FORMAT } from '../../../utils/constants';
+import { setEducation, setSelectedEducationId } from '../logic/resumeSlice';
+import type { Education } from '../logic/types';
 
 interface Props {
   onCancel: () => void;

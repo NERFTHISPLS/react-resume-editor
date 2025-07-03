@@ -11,3 +11,10 @@ export function updateSliceArray<T extends { id: string }>(
     return [...array, action.payload];
   }
 }
+
+export function deleteFromArray<T extends { id: string }>(
+  id: string,
+  array: T[],
+): T[] {
+  return array.filter((item) => item.id !== id);
+}

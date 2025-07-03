@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { updateSliceArray } from '../../utils/helpers';
+import { deleteFromArray, updateSliceArray } from '../../utils/helpers';
 import type {
   About,
   Certificate,
@@ -51,7 +51,7 @@ export const resumeSlice = createSlice({
   name: 'resume',
   initialState,
   reducers: {
-    setPersonalInfo: (state, action: PayloadAction<PersonalInfo>) => {
+    setPersonalInfo: (state, action: PayloadAction<PersonalInfo | null>) => {
       state.personalInfo = action.payload;
     },
 
@@ -62,6 +62,10 @@ export const resumeSlice = createSlice({
         action,
       );
       state.selectedExperienceId = null;
+    },
+
+    deleteExperience: (state, action: PayloadAction<string>) => {
+      state.experience = deleteFromArray(action.payload, state.experience);
     },
 
     setSelectedExperienceId: (state, action: PayloadAction<string | null>) => {
@@ -77,6 +81,10 @@ export const resumeSlice = createSlice({
       state.selectedEducationId = null;
     },
 
+    deleteEducation: (state, action: PayloadAction<string>) => {
+      state.education = deleteFromArray(action.payload, state.education);
+    },
+
     setSelectedEducationId: (state, action: PayloadAction<string | null>) => {
       state.selectedEducationId = action.payload;
     },
@@ -88,6 +96,10 @@ export const resumeSlice = createSlice({
         action,
       );
       state.selectedSkillId = null;
+    },
+
+    deleteSkill: (state, action: PayloadAction<string>) => {
+      state.skills = deleteFromArray(action.payload, state.skills);
     },
 
     setSelectedSkillId: (state, action: PayloadAction<string | null>) => {
@@ -103,11 +115,15 @@ export const resumeSlice = createSlice({
       state.selectedCertificateId = null;
     },
 
+    deleteCertificate: (state, action: PayloadAction<string>) => {
+      state.certificates = deleteFromArray(action.payload, state.certificates);
+    },
+
     setSelectedCertificateId: (state, action: PayloadAction<string | null>) => {
       state.selectedCertificateId = action.payload;
     },
 
-    setAbout: (state, action: PayloadAction<About>) => {
+    setAbout: (state, action: PayloadAction<About | null>) => {
       state.about = action.payload;
     },
   },
@@ -116,12 +132,16 @@ export const resumeSlice = createSlice({
 export const {
   setPersonalInfo,
   setExperience,
+  deleteExperience,
   setSelectedExperienceId,
   setEducation,
+  deleteEducation,
   setSelectedEducationId,
   setSkills,
+  deleteSkill,
   setSelectedSkillId,
   setCertificates,
+  deleteCertificate,
   setSelectedCertificateId,
   setAbout,
 } = resumeSlice.actions;

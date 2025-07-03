@@ -1,9 +1,10 @@
+import type { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
-import { setSelectedCertificateId } from './resumeSlice';
+import { deleteCertificate, setSelectedCertificateId } from './resumeSlice';
 
 interface Props {
   onClick: () => void;
@@ -16,6 +17,12 @@ export default function Certificates({ onClick }: Props) {
 
   const dispatch = useDispatch();
 
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
+
+    dispatch(deleteCertificate(id));
+  };
+
   return (
     <section className="flex flex-col" onClick={onClick}>
       <h2 className="text-2xl font-bold mb-2">Сертификаты</h2>
@@ -26,6 +33,7 @@ export default function Certificates({ onClick }: Props) {
             key={item.id}
             title={item.name}
             onClick={() => dispatch(setSelectedCertificateId(item.id))}
+            onDelete={(e) => handleDelete(e, item.id)}
           >
             <BlockInfoRow title="Дата" info={item.date} />
             <BlockInfoRow title="Описание" info={item.description} />

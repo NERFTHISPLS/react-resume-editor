@@ -28,7 +28,7 @@ export default function AboutForm({ onCancel }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(setAbout(form));
+    dispatch(setAbout(form.description ? form : null));
     onCancel();
   };
 

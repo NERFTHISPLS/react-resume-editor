@@ -1,8 +1,9 @@
 import { format } from 'date-fns';
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import type { RootState } from '../../store';
+import type { FormChangeEvent } from '../../types';
 import BlockForm from '../../ui/BlockForm';
 import FormRow from '../../ui/FormRow';
 import { DATE_FORMAT } from '../../utils/constants';
@@ -34,9 +35,7 @@ export default function EducationForm({ onCancel }: Props) {
 
   const dispatch = useDispatch();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: FormChangeEvent) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 

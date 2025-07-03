@@ -17,7 +17,7 @@ export default function About({ onClick }: Props) {
 
       {about && (
         <BlockInfo>
-          <BlockInfoRow title="Описание" info={about.description} />
+          <BlockInfoRow info={about.description} />
         </BlockInfo>
       )}
 

@@ -1,6 +1,7 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
+import type { FormChangeEvent } from '../../types';
 import BlockForm from '../../ui/BlockForm';
 import FormRow from '../../ui/FormRow';
 import { setPersonalInfo } from './resumeSlice';
@@ -25,9 +26,7 @@ export default function PersonalInfoForm({ onCancel }: Props) {
 
   const dispatch = useDispatch();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: FormChangeEvent) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 

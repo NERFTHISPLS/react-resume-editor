@@ -1,4 +1,5 @@
-import type { ChangeEvent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import type { FormChangeEvent } from '../types';
 
 interface Props {
   inputType: string;
@@ -6,10 +7,8 @@ interface Props {
   className?: string;
   value?: string;
   isRequired?: boolean;
-  onChange?: (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) => void;
-  children: ReactNode;
+  onChange?: (e: FormChangeEvent) => void;
+  children?: ReactNode;
 }
 
 export default function FormRow({
@@ -24,7 +23,7 @@ export default function FormRow({
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
       <label className="font-medium" htmlFor={htmlFor}>
-        {children}
+        {children ?? ''}
         {isRequired && <span className="text-red-700">*</span>}
       </label>
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Modal from '../../ui/Modal';
 import About from './About';
+import AboutForm from './AboutForm';
 import Certificates from './Certificates';
 import CertificatesForm from './CertificatesForm';
 import Education from './Education';
@@ -47,6 +48,8 @@ export default function Editor() {
         {openedBlock === 'certificates' && (
           <CertificatesForm onCancel={handleCloseForm} />
         )}
+
+        {openedBlock === 'about' && <AboutForm onCancel={handleCloseForm} />}
       </Modal>
     </div>
   );

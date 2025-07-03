@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
+import { setSelectedExperienceId } from './resumeSlice';
 
 interface Props {
   onClick: () => void;
@@ -10,6 +11,7 @@ interface Props {
 
 export default function Experience({ onClick }: Props) {
   const experience = useSelector((state: RootState) => state.resume.experience);
+  const dispatch = useDispatch();
 
   return (
     <section className="flex flex-col" onClick={onClick}>
@@ -17,7 +19,11 @@ export default function Experience({ onClick }: Props) {
 
       {experience.length > 0 &&
         experience.map((item) => (
-          <BlockInfo key={item.position} title={item.position}>
+          <BlockInfo
+            key={item.id}
+            title={item.position}
+            onClick={() => dispatch(setSelectedExperienceId(item.id))}
+          >
             <BlockInfoRow title="Компания" info={item.company} />
             <BlockInfoRow
               title="Даты"
@@ -27,7 +33,9 @@ export default function Experience({ onClick }: Props) {
           </BlockInfo>
         ))}
 
-      <AddBlockButton>+ Добавить опыт работы</AddBlockButton>
+      <AddBlockButton onClick={() => dispatch(setSelectedExperienceId(null))}>
+        + Добавить опыт работы
+      </AddBlockButton>
     </section>
   );
 }

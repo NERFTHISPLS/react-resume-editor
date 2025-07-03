@@ -1,9 +1,10 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
-import ResumeBlockForm from '../../ui/BlockForm';
+import BlockForm from '../../ui/BlockForm';
 import FormRow from '../../ui/FormRow';
 import { setPersonalInfo } from './resumeSlice';
+import type { PersonalInfo } from './types';
 
 interface Props {
   onCancel: () => void;
@@ -13,12 +14,12 @@ export default function PersonalInfoForm({ onCancel }: Props) {
   const { name, surname, patronymic, email, phone } =
     useSelector((state: RootState) => state.resume.personalInfo) ?? {};
 
-  const [form, setForm] = useState({
-    name,
-    surname,
-    patronymic,
-    email,
-    phone,
+  const [form, setForm] = useState<PersonalInfo>({
+    name: name ?? '',
+    surname: surname ?? '',
+    patronymic: patronymic ?? '',
+    email: email ?? '',
+    phone: phone ?? '',
   });
 
   const dispatch = useDispatch();
@@ -37,12 +38,13 @@ export default function PersonalInfoForm({ onCancel }: Props) {
   };
 
   return (
-    <ResumeBlockForm
+    <BlockForm
       title="Личные данные"
       onCancel={onCancel}
       onSubmit={handleSubmit}
     >
       <FormRow
+        isRequired={true}
         inputType="text"
         htmlFor="name"
         value={form.name}
@@ -52,6 +54,7 @@ export default function PersonalInfoForm({ onCancel }: Props) {
       </FormRow>
 
       <FormRow
+        isRequired={true}
         inputType="text"
         htmlFor="surname"
         value={form.surname}
@@ -70,7 +73,8 @@ export default function PersonalInfoForm({ onCancel }: Props) {
       </FormRow>
 
       <FormRow
-        inputType="text"
+        isRequired={true}
+        inputType="email"
         htmlFor="email"
         value={form.email}
         onChange={handleChange}
@@ -79,13 +83,14 @@ export default function PersonalInfoForm({ onCancel }: Props) {
       </FormRow>
 
       <FormRow
-        inputType="text"
+        isRequired={true}
+        inputType="tel"
         htmlFor="phone"
         value={form.phone}
         onChange={handleChange}
       >
         Телефон
       </FormRow>
-    </ResumeBlockForm>
+    </BlockForm>
   );
 }

@@ -5,6 +5,7 @@ interface Props {
   htmlFor?: string;
   className?: string;
   value?: string;
+  isRequired?: boolean;
   onChange?: (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
   ) => void;
@@ -15,6 +16,7 @@ export default function FormRow({
   inputType,
   htmlFor,
   className = '',
+  isRequired = false,
   value,
   onChange,
   children,
@@ -23,10 +25,12 @@ export default function FormRow({
     <div className={`flex flex-col gap-1 ${className}`}>
       <label className="font-medium" htmlFor={htmlFor}>
         {children}
+        {isRequired && <span className="text-red-700">*</span>}
       </label>
 
       {inputType !== 'textarea' && (
         <input
+          required={isRequired}
           type={inputType}
           className="border border-gray-300 rounded-md p-2"
           id={htmlFor}
@@ -37,6 +41,7 @@ export default function FormRow({
 
       {inputType === 'textarea' && (
         <textarea
+          required={isRequired}
           className="border border-gray-300 rounded-md p-2"
           id={htmlFor}
           value={value}

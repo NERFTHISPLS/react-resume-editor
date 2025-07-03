@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { Resume } from './types';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { Experience, PersonalInfo, Resume } from './types';
 
 const initialState: Resume = {
   personalInfo: {
@@ -9,23 +9,44 @@ const initialState: Resume = {
     email: 'ivanov@example.com',
     phone: '+79991234567',
   },
-  experience: [],
+  experience: [
+    {
+      id: '1',
+      position: 'Разработчик',
+      company: 'ООО "Рога и копыта"',
+      startDate: '2020-01-01',
+      endDate: '2022-01-01',
+      description: 'Описание опыта работы',
+    },
+  ],
   education: [],
   skills: [],
   certificates: [],
   about: null,
+  selectedExperienceId: null,
 };
 
 export const resumeSlice = createSlice({
   name: 'resume',
   initialState,
   reducers: {
-    setPersonalInfo: (state, action) => {
+    setPersonalInfo: (state, action: PayloadAction<PersonalInfo>) => {
       state.personalInfo = action.payload;
     },
 
-    setExperience: (state, action) => {
-      state.experience = action.payload;
+    setExperience: (state, action: PayloadAction<Experience>) => {
+      if (state.selectedExperienceId) {
+        state.experience = state.experience.map((exp) =>
+          exp.id === state.selectedExperienceId ? action.payload : exp,
+        );
+        state.selectedExperienceId = null;
+      } else {
+        state.experience.push(action.payload);
+      }
+    },
+
+    setSelectedExperienceId: (state, action: PayloadAction<string | null>) => {
+      state.selectedExperienceId = action.payload;
     },
 
     setEducation: (state, action) => {
@@ -49,6 +70,7 @@ export const resumeSlice = createSlice({
 export const {
   setPersonalInfo,
   setExperience,
+  setSelectedExperienceId,
   setEducation,
   setSkills,
   setCertificates,

@@ -7,6 +7,7 @@ export interface PersonalInfo {
 }
 
 export interface Experience {
+  id: string;
   position: string;
   company: string;
   startDate: string;
@@ -44,6 +45,7 @@ export interface Resume {
   skills: Skill[];
   certificates: Certificate[];
   about: About | null;
+  selectedExperienceId: string | null;
 }
 
 export type BlockType =

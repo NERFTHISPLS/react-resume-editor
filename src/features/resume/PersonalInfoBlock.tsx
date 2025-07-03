@@ -4,13 +4,17 @@ import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
 
-export default function PersonalInfoBlock() {
+interface Props {
+  onClick: () => void;
+}
+
+export default function PersonalInfoBlock({ onClick }: Props) {
   const personalInfo = useSelector(
     (state: RootState) => state.resume.personalInfo,
   );
 
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col" onClick={onClick}>
       <h2 className="text-2xl font-bold mb-2">Личные данные</h2>
 
       {personalInfo && (

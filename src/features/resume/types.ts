@@ -45,3 +45,11 @@ export interface Resume {
   certificates: Certificate[];
   about: About | null;
 }
+
+export type BlockType =
+  | 'personalInfo'
+  | 'experience'
+  | 'education'
+  | 'skills'
+  | 'certificates'
+  | 'about';

@@ -4,11 +4,15 @@ import AddBlockButton from '../../ui/AddBlockButton';
 import BlockInfo from './BlockInfo';
 import BlockInfoRow from './BlockInfoRow';
 
-export default function About() {
+interface Props {
+  onClick: () => void;
+}
+
+export default function About({ onClick }: Props) {
   const about = useSelector((state: RootState) => state.resume.about);
 
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col" onClick={onClick}>
       <h2 className="text-2xl font-bold mb-2">О себе</h2>
 
       {about && (
